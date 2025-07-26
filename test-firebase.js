@@ -1,0 +1,10 @@
+const { initializeApp, applicationDefault } = require('firebase-admin/app');
+const { getAuth } = require('firebase-admin/auth');
+
+initializeApp({ credential: applicationDefault() });
+ 
+// Paste your ID token from the Authorization header here
+const idToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImE4ZGY2MmQzYTBhNDRlM2RmY2RjYWZjNmRhMTM4Mzc3NDU5ZjliMDEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3Jld3plbiIsImF1ZCI6ImNyZXd6ZW4iLCJhdXRoX3RpbWUiOjE3NTI3NTI4MTMsInVzZXJfaWQiOiI2R3U0M1hKSTFWV25FNnBFY08wZjBtRkVFVEwyIiwic3ViIjoiNkd1NDNYSkkxVlduRTZwRWNPMGYwbUZFRVRMMiIsImlhdCI6MTc1Mjc1MjgxMywiZXhwIjoxNzUyNzU2NDEzLCJlbWFpbCI6ImthdmVuQGJ1aWxkMjYtNi5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsia2F2ZW5AYnVpbGQyNi02LmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.aUiRZeEUg9psvhSdDiL4ov76fNsem4bzOKaDVAyaETgwISXBUxrqCqc1EEG_4-RfPQR6rBmiJsCW7Scs8FlwuHT828wjDmwNsqT5z20MgvJ6gw0XliT0ZTtW9VmB_jhQj3zKKeOpaJjm9MR1LB_yEbiOSHl9vvdoyuguURhSn5mNX0hI_d3bRlTNh0rhdmWnCJkdLPR2ospflDZ33gNQ4T5c6SYx3GmB5M7EVpGCbjMXSagqan3Jh7yd2wP-64mbJu6QZ6VWxhHEe3_Y34KwuB7pknMDJQ9ZNnrCRbMbn8oPG8xlz1ivoy3SZn5Ohk2mb0QkyOsmqx5PgbH1f5zXjQ';
+getAuth().verifyIdToken(idToken)
+  .then(decoded => console.log('Decoded:', decoded))
+  .catch(err => console.error('Error:', err)); 

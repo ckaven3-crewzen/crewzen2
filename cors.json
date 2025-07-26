@@ -1,0 +1,24 @@
+
+[
+  {
+    "origin": [
+      "http://localhost:3000",
+      "https://*.cloudworkstations.dev",
+      "https://crewzen.firebaseapp.com",
+      "https://crewzen.web.app"
+    ],
+    "method": [
+      "GET",
+      "PUT",
+      "POST",
+      "DELETE",
+      "OPTIONS"
+    ],
+    "responseHeader": [
+      "Content-Type",
+      "Access-Control-Allow-Origin",
+      "x-goog-resumable"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]
