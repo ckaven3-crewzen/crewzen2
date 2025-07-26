@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow authenticated users to read and write their own employee profile
+    match /employees/{employeeId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == resource.data.authUid || 
+         request.auth.uid == employeeId);
+    }
+    
+    // Allow authenticated users to read and write their own worker profile
+    match /workerProfiles/{workerId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == workerId || 
+         resource.data.id == request.auth.uid);
+    }
+    
+    // Allow authenticated users to read and write their own company profile
+    match /connectZenCompanies/{companyId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == companyId || 
+         resource.data.email == request.auth.token.email);
+    }
+    
+    // Allow authenticated users to read and write company settings
+    match /settings/{document} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Allow authenticated users to read and write estates
+    match /estates/{estateId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Allow authenticated users to read and write projects from their own company
+    match /projects/{projectId} {
+      allow read, write: if request.auth != null && 
+        (resource.data.companyId == request.auth.uid || 
+         resource.data.companyId == get(/databases/$(database)/documents/employees/$(request.auth.uid)).data.companyId);
+    }
+    
+    // Allow authenticated users to read and write reports
+    match /reports/{reportId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Allow authenticated users to read and write access bundles
+    match /accessBundles/{bundleId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Allow authenticated users to read and write email access bundles
+    match /emailAccessBundles/{bundleId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+} 

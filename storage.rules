@@ -1,0 +1,10 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/crewzen.firebasestorage.app/o {
+    // DEVELOPMENT: WIDE OPEN ACCESS - ALLOW EVERYTHING
+    // WARNING: This is for development only. Do NOT use in production!
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+} 
